@@ -1,0 +1,20 @@
+// we want to produce a dashboard 
+// that shows the category and subcategory of products that sold more than twice the 
+// average sales amount.
+
+// file: F 03 07
+
+VAR subcategories = ALL('Product'[Category],'Product'[Subcategory])
+VAR avgOfSubcat = 
+    AVERAGEX(
+        subcategories,
+        SUMX(RELATEDTABLE('Sales'),[Sales Amount])
+        )
+VAR topProducts = 
+    FILTER(
+        subcategories,
+        VAR amtsold = SUMX(RELATEDTABLE('Sales'),[Sales Amount])
+        RETURN
+        amtsold > avgOfSubcat*2
+        )
+RETURN topProducts
