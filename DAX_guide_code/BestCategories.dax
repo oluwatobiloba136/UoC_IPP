@@ -15,6 +15,6 @@ VAR topProducts =
         subcategories,
         VAR amtsold = SUMX(RELATEDTABLE('Sales'),[Sales Amount])
         RETURN
-        amtsold > avgOfSubcat*2
+        amtsold >= avgOfSubcat*2
         )
 RETURN topProducts
