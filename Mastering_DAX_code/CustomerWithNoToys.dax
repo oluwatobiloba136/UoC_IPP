@@ -1,0 +1,15 @@
+--
+-- # CustNoToys using Calculate
+-- Measure in Sales table
+--
+# CustNoToys using Calculate :=
+CALCULATE ( 
+ COUNTROWS ( 
+ FILTER ( 
+ Customer,
+ CALCULATE ( ISEMPTY ( Sales ) ) 
+ ) 
+ ),
+ Customer[Total Children] > 0,
+ 'Product'[Category] = "Games and Toys" 
+)

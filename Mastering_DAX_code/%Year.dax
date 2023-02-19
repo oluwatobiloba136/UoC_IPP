@@ -1,0 +1,13 @@
+VAR amt = [Sales Amount]
+VAR totalSalesYear =
+    CALCULATE (
+        [Sales Amount],
+        ALL ( 'Sales' ),
+        VALUES ( 'Date'[Year] )
+    )
+RETURN
+    DIVIDE (
+        amt,
+        totalSalesYear,
+        0
+    )

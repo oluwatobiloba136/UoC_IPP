@@ -1,0 +1,8 @@
+// produce brand name and if multiple contains the different brands separated by a 
+// comma instead of the generic message
+
+CONCATENATEX(
+    VALUES('Product'[Brand]),
+    'Product'[Brand],
+    ","
+)

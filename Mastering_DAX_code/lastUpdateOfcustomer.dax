@@ -1,0 +1,23 @@
+
+// // Add a CustomerAge calculated column in the Customer table that computes the age
+// // of the customer at the time of their last order by computing the days between Birth
+// Date and LastUpdate, dividing the result by 365.25. If the customer has no orders the
+// LastUpdate column is blank: in that case, also keep a blank in CustomerAge. Keep a 
+// blank in CustomerAge also when the Customer[Birth Date] column is blank.
+
+// create a column on the customer table
+
+Last Update = 
+MAXX(
+    RELATEDTABLE('Sales'), 'Sales'[Order Date]
+)
+
+// customer age column
+CustomerAge = 
+IF(
+    ISBLANK('Customer'[Last Update]) || ISBLANK('Customer'[Birth Date]),
+    BLANK(),
+    VAR age = 'Customer'[Last Update] - 'Customer'[Birth Date]
+    VAR ageYears = INT(age/365.24)
+    RETURN ageYears & " years"
+)
