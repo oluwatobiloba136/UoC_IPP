@@ -1,0 +1,19 @@
+VAR maxxDailySales = 
+MAXX(
+    'Date',[Sales Amount]
+)
+
+VAR daysWithMaxSales = 
+FILTER(
+    VALUES('Date'[Date]),
+    [Sales Amount] = maxxDailySales
+)
+
+VAR rst = 
+CONCATENATEX(
+    daysWithMaxSales,
+     FORMAT([Date], "mm-dd-yyyy"),
+     ", "
+)
+
+RETURN IF(NOT ISBLANK(maxxDailySales), rst)

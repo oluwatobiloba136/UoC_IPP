@@ -1,0 +1,35 @@
+--Create a # CustMultProds measure that computes the number of customers that
+-- purchased at least two different products in the current time selection.
+
+VAR CustMultProds= 
+FILTER(
+    'Customer',
+    CALCULATE(
+        DISTINCTCOUNT('Sales'[ProductKey]) >= 2
+    )
+)
+VAR rst = 
+COUNTROWS(CustMultProds)
+
+Create the # CustSelProds measure that computes the number of customers who
+purchased - in the current time selection – at least the number of products selected
+in the slicer.
+
+VAR numSelected = SELECTEDVALUE('Num of Product'[number], 2)
+VAR rst2 = 
+FILTER(
+    'Customer',
+    CALCULATE(
+        DISTINCTCOUNT('Sales'[ProductKey]) >= numSelected
+    )
+)
+RETURN rst2
+
+Create a Sales CustSelProds measure that returns the Sales Amount of the customers
+filtered with the logic implemented in the # CustSelProds measure
+
+Var CustSelProds = 
+CALCULATE(
+    [sales amount],
+    rst2
+)

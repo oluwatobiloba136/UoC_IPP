@@ -1,0 +1,17 @@
+VAR LastVisibleDate = MAX ( 'Date'[Date] )
+VAR NumberOfDays = 30
+VAR PeriodToUse =
+ FILTER ( 
+ ALL ( 'Date' ),
+ AND ( 
+ 'Date'[Date] > LastVisibleDate - NumberOfDays,
+ 'Date'[Date] <= LastVisibleDate
+ )
+ )
+VAR Result = 
+ CALCULATE (
+ AVERAGEX ( 'Date', [Sales Amount] ) ,
+ PeriodToUse
+ )
+RETURN
+ Result

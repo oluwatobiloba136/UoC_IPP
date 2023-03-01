@@ -1,0 +1,10 @@
+Large Sales (Correct) = 
+CALCULATE ( 
+    [Sales Amount],
+    KEEPFILTERS ( 
+        FILTER ( 
+            ALL ( Sales[Quantity], Sales[Net Price] ),
+            Sales[Quantity] * Sales[Net Price] >= 1000 
+            ) 
+    ) 
+) 

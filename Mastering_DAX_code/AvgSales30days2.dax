@@ -1,0 +1,19 @@
+If the requirement is to compute the average over dates counting days with no sales as zeroes, then 
+the formula to use is almost always a simple division instead of AVERAGEX
+
+vgSales30 := 
+VAR LastVisibleDate = MAX ( 'Date'[Date] )
+VAR NumberOfDays = 30
+VAR PeriodToUse =
+ FILTER ( 
+ ALL ( 'Date' ),
+ 'Date'[Date] > LastVisibleDate - NumberOfDays &&
+ 'Date'[Date] <= LastVisibleDate
+ )
+VAR Result =
+CALCULATE (
+ DIVIDE ( [Sales Amount], COUNTROWS ( 'Date' ) ),
+ PeriodToUse
+)
+RETURN
+ Result

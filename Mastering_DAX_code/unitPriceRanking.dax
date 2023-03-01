@@ -1,0 +1,11 @@
+// create a claculated column
+VAR currentUnitPrice = Product[Unit Price]
+
+VAR currentUnitPriceRank = 
+
+FILTER(
+    VALUES(Product[Unit Price]),
+    Product[Unit Price] > currentUnitPrice
+)
+
+RETURN COUNTROWS(currentUnitPriceRank)+1

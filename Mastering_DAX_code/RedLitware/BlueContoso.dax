@@ -1,0 +1,14 @@
+CALCULATE(
+    [Sales Amount],
+  KEEPFILTERS(
+    FILTER(
+        ALL('Product'[Color], 'Product'[Brand]),
+        ('Product'[Color],'Product'[Brand]) in 
+        {
+            ("Red", "Litware"),
+            ("Blue","Contoso")
+        }
+    )
+  )  
+    
+)

@@ -1,0 +1,12 @@
+Correct Average := 
+VAR CustomersAge =
+ SUMMARIZE ( -- Existing combinations
+ Sales, -- that exist in Sales
+ Sales[CustomerKey], -- of the customer key and 
+ Sales[Customer Age] -- the customer age
+ ) 
+RETURN
+AVERAGEX ( -- Iterate on list of
+ CustomersAge, -- Customers/age in Sales
+ Sales[Customer Age] -- and average the customer’s age
+)

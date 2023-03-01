@@ -1,0 +1,22 @@
+claculated column in product 
+FirstSaleDate = CALCULATE(MIN( 'Sales'[Order Date]))
+
+Measure in Sales
+Sales 3MO =
+VAR filterProdDates3Months = 
+    GENERATE(
+        VALUES('Product'[FirstSaleDate]),
+        DATESINPERIOD(
+            'Date'[Date],
+            'Product'[FirstSaleDate],
+            +3,
+            MONTH
+        )
+    )
+
+VAR Sales3M = 
+    CALCULATE(
+        [Sales Amount],
+        filterProdDates3Months
+    )
+RETURN Sales3M

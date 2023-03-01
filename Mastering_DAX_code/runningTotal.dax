@@ -1,0 +1,9 @@
+Running Total := 
+VAR LastVisibleDate = MAX ( 'Date'[Date] ) 
+VAR Result = 
+ CALCULATE ( 
+ [Sales Amount],
+ 'Date'[Date] <= LastVisibleDate
+ ) 
+RETURN
+ Result

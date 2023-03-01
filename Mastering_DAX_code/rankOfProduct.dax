@@ -1,0 +1,14 @@
+VAR rankProduct =
+   IF(
+        ISINSCOPE('Product'[Category]),
+        RANKX(
+                ALLEXCEPT('Product', 'Product'[Category]),
+            [Sales Amount]
+        ),
+        RANKX(
+                ALLSELECTED('Product'),
+            [Sales Amount]
+        )
+    )
+     
+    

@@ -1,0 +1,24 @@
+VAR AvgSales = AVERAGEX('Customer', [Sales Amount])
+VAR CustomerAboveAvg = 
+FILTER(
+    'Customer',
+    [Sales Amount] > AvgSales
+)
+RETURN
+COUNTROWS(CustomerAboveAvg)
+
+# GoodCustomers (Year) :=
+VAR AverageSales = 
+ CALCULATE ( 
+ [AvgSales], 
+ REMOVEFILTERS ( 'Date' ), 
+ VALUES ( 'Date'[Year] ) 
+ ) 
+VAR CustomersAboveAverage = 
+ FILTER ( 
+ Customer,
+ [Sales Amount] > AverageSales
+ ) 
+VAR Result = COUNTROWS ( CustomersAboveAverage ) 
+RETURN
+ Result
