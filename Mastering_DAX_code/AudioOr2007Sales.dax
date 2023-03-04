@@ -1,0 +1,22 @@
+// the requirement is to fi lter columns from different tables like color and year
+AudioOr2007 Sales := 
+VAR CategoriesYears =
+ CROSSJOIN (
+    VALUES ( 'Product'[Category] ),
+    VALUES ( 'Date'[Calendar Year] )
+ )
+VAR Audio2007 = 
+ FILTER (
+ CategoriesYears,
+ OR (
+    'Product'[Category] = "Audio",
+    'Date'[Calendar Year] = "CY 2007"
+ )
+ )
+
+VAR Result =
+ CALCULATE (
+        [Sales Amount],
+        Audio2007
+ )
+RETURN Result

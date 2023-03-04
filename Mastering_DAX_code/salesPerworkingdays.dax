@@ -1,0 +1,26 @@
+// we might want to compute the sales per working day
+
+// This calculation is useful to produce a 
+// performance indicator for each month, considering both the gross amount of sales and the number of 
+// days in which sales were possible
+
+
+NumOfDays := COUNTROWS ( 'Date' )
+NumOfWorkingDays := SUM ( 'Date'[IsWorkingDay] )
+
+SalesPerWorkingDay := 
+VAR WorkingDays =
+ SUMX ( 
+ VALUES ( 'Date'[Calendar Year Month] ),
+ IF ( 
+ [Sales Amount] > 0,
+ [NumOfWorkingDays]
+ )
+ ) 
+VAR Result = 
+ DIVIDE ( 
+ [Sales Amount], 
+ WorkingDays
+ )
+RETURN 
+ Result

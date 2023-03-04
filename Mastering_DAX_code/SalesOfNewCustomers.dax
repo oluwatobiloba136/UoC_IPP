@@ -1,0 +1,17 @@
+// To compute the number of customers who did not buy anything last year but bought 
+// something this year, the following measure removes customers who bought a product in the previous 
+// year from the set of current customers:
+ SalessOfNewCustomers :=
+ VAR CurrentCustomers = VALUES('Sales'[CustomerKey]) -- get the customer in the current filter
+ VAR CustomerLastYear = 
+    CALCULATETABLE(
+        VALUES('Sales'[CustomerKey]), -- get a list of customer that appears on sales table
+        DATESINPERIOD('Date'[Date], MIN('Date'[Date])-1, -1, YEAR) -- apply a filter to go back a year 
+    )
+
+VAR CustomersNotInLastYear = 
+EXCEPT(CurrentCustomers, CustomerLastYear)
+
+VAR Result = CALCULATE(
+    [Sales Amount], CustomersNotInLastYear
+)

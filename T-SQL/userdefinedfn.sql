@@ -29,3 +29,8 @@ SELECT StoreID, TerritoryID,
  dbo.udf_Delim(FirstName,',') AS FirstNameWithCommas
 FROM Sales.Customer AS c
 INNER JOIN Person.Person AS p ON c.PersonID= p.BusinessEntityID;
+
+
+Select FirstName, Lastname, 3 as scores
+from Employees
+

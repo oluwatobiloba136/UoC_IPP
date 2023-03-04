@@ -1,0 +1,25 @@
+// filtering all the products that belong to the Audio category or have a Black color
+
+//** same table filter and the use of OR 
+AudioOrBlackSales := 
+VAR CategoriesColors = 
+            SUMMARIZE (
+            'Product',
+            'Product'[Category],
+            'Product'[Color]
+            )
+VAR AudioOrBlack =
+        FILTER (
+        CategoriesColors,
+        OR (
+        'Product'[Category] = "Audio",
+        'Product'[Color] = "Black"
+        )
+        )
+VAR Result =
+            CALCULATE (
+                [Sales Amount],
+                AudioOrBlack
+            )
+RETURN Result
+

@@ -1,0 +1,13 @@
+Sum("Detailed Cust. Ledg. Entry"."Amount (LCY)"  -----Source
+
+ WHERE (
+    
+    Ledger Entry Amount= CONST(Yes),  ---- Ledger Entry Amount is from Source and must be Yes which 1
+Cust. Ledger Entry No.=FIELD(Entry No.),  ----  do a join based on the condition
+Posting Date=FIELD(Date Filter)) 
+
+);
+
+
+Source ------ Destination
+Detailed Cust Ledg, Entry ---- Cust Ledg, Entry

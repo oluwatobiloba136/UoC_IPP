@@ -1,0 +1,17 @@
+// to compute the average quantity sold per product and per day,
+
+AvgDailyQty :=
+VAR ProductsDatesWithSales =
+ SUMMARIZE (
+ Sales,
+ 'Product'[Product Name],
+ 'Date'[Date]
+ )
+VAR Result =
+ AVERAGEX (
+ ProductsDatesWithSales,
+ CALCULATE (
+ SUM ( Sales[Quantity] )
+ )
+ )
+RETURN Result

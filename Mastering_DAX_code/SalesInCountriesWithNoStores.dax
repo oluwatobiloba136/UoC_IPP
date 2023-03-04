@@ -1,0 +1,8 @@
+// computes the sales made to customers living in 
+// countries where there are no stores
+
+VAR countriesWithActiveStores = 
+CALCULATETABLE(
+    SUMMARIZE('Sales', 'store'[CountryRegion]), -- get t
+    ALL('Sales')
+)
