@@ -1,0 +1,21 @@
+VAR CustomersFirstSale = 
+// list of all buying customer and their first buying date
+
+CALCULATETABLE(
+    ADDCOLUMNS(
+        VALUES('Sales'[CustomerKey]),
+        "FirstSale",CALCULATE(MIN('Sales'[Order Date]))
+    ),
+    ALL('Date')
+)
+
+VAR CustomersWith1stSaleInCurrentPeriod = 
+FILTER(
+    CustomersFirstSale,
+    [FirstSale] in VALUES('Date'[Date])
+
+)
+
+VAR Result = COUNTROWS(CustomersWith1stSaleInCurrentPeriod)
+
+RETURN Result

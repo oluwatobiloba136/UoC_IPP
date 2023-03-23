@@ -11,3 +11,5 @@ Posting Date=FIELD(Date Filter))
 
 Source ------ Destination
 Detailed Cust Ledg, Entry ---- Cust Ledg, Entry
+
+"MEDICAL REP"	MEDICAL REP	MED REP	MED. REP.	KEY ACCOUNT REP	KEY. ACCOUNT . OFF.	MOB REP	MOBILE REP

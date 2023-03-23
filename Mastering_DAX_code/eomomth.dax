@@ -1,0 +1,35 @@
+EOMONTH(TODAY(), -1)
+
+new incurred =
+CALCULATE(
+SUM( 'Baseline Cost'[Baseline Cost]),
+'Baseline Cost'[DateInt]<=
+EOMONTH(TODAY(), -1))
+
+
+
+zip File password (s): www.downloadly.ir
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

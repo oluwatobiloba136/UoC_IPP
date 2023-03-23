@@ -1,0 +1,30 @@
+// demonstrate how to analyze sales over time but only considering customers who made a purchase during 
+// the first year of a selected time period. In other words, we consider the first year with sales in 
+// the visual, evaluate the customers who bought during that first year, and then we only analyze 
+// the sales of those customers over the following years, ignoring those who became customers 
+// afterwards
+
+VAR FirstYearWithSales = 
+// create a list of year that store first year with sales
+    CALCULATETABLE(
+        FIRSTNONBLANK(
+            'Date'[Calendar Year],
+            [Sales Amount]
+        ), ALLSELECTED()
+    )
+
+VAR CustomersFirstYear = 
+// retrieves the list of qll customers in that first year
+CALCULATETABLE(
+    VALUES('Sales'[customerKey]),
+    FirstYearWithSales,
+    ALLSELECTED()
+) 
+
+VAR Result = 
+CALCULATE(
+    [Sales Amount],
+    KEEPFILTERS(CustomersFirstYear)
+)
+
+RETURN Result
